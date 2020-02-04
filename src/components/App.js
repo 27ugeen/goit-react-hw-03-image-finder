@@ -4,6 +4,7 @@ import Spinner from './Spinner';
 import Notification from './Notification';
 import ImageGallery from './ImageGallery';
 import Button from './Button';
+import Modal from './Modal';
 import imagesApi from '../services/imagesApi';
 
 export default class App extends Component {
@@ -13,6 +14,7 @@ export default class App extends Component {
     error: null,
     searchQuery: '',
     page: 1,
+    largeImage: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -45,7 +47,7 @@ export default class App extends Component {
           page: prevState.page + 1,
         })),
       )
-      .catch(error => this.setState({ error }))
+      .catch(({ message }) => this.setState({ error: message }))
       .finally(() => this.setState({ loading: false }));
   };
 
@@ -57,19 +59,36 @@ export default class App extends Component {
     });
   };
 
+  setLargeImage = url => {
+    this.setState({ largeImage: url });
+  };
+
+  toggleModal = () => {
+    this.setState({ largeImage: null });
+  };
+
   render() {
-    const { images, loading, error } = this.state;
+    const { images, loading, error, searchQuery, largeImage } = this.state;
     return (
       <>
-        <Searchbar onSubmit={this.handleSearchFormSubmit} />
-
-        {error && <Notification message={error} />}
-
-        {images.length > 0 && <ImageGallery images={images} />}
-        {loading && <Spinner />}
-
-        {images.length > 0 && !loading && (
-          <Button onLoadMore={this.fetchImages} />
+        <div className="App">
+          <Searchbar onSubmit={this.handleSearchFormSubmit} />
+          {error && <Notification message={error} />}
+          {images.length > 0 && (
+            <ImageGallery
+              images={images}
+              onSetLargeImage={this.setLargeImage}
+            />
+          )}
+          {loading && <Spinner />}
+          {images.length > 0 && !loading && (
+            <Button onLoadMore={this.fetchImages} />
+          )}
+        </div>
+        {largeImage && (
+          <Modal onClose={this.toggleModal}>
+            <img src={largeImage} alt={searchQuery} />
+          </Modal>
         )}
       </>
     );

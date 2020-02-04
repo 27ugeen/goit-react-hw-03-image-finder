@@ -1,10 +1,10 @@
 import React from 'react';
 import ImageGalleryItem from './ImageGalleryItem';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, onSetLargeImage }) => {
   return (
     <ul className="ImageGallery">
-      <ImageGalleryItem images={images} />
+      <ImageGalleryItem images={images} onSetLargeImage={onSetLargeImage} />
     </ul>
   );
 };
