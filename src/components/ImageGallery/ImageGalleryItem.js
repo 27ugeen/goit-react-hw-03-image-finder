@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ImageGalleryItem = ({ images, onSetLargeImage }) => (
   <>
@@ -13,5 +14,16 @@ const ImageGalleryItem = ({ images, onSetLargeImage }) => (
     ))}
   </>
 );
+
+ImageGalleryItem.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    }),
+  ),
+  onSetLargeImage: PropTypes.func.isRequired,
+};
 
 export default ImageGalleryItem;

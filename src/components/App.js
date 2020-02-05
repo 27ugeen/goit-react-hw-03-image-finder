@@ -6,15 +6,34 @@ import ImageGallery from './ImageGallery';
 import Button from './Button';
 import Modal from './Modal';
 import imagesApi from '../services/imagesApi';
+import PropTypes from 'prop-types';
 
 export default class App extends Component {
-  state = {
+  static defaultProps = {
     images: [],
     loading: false,
-    error: null,
+    error: '',
     searchQuery: '',
     page: 1,
-    largeImage: null,
+    largeImage: '',
+  };
+
+  static propTypes = {
+    images: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.string.isRequired,
+    searchQuery: PropTypes.string.isRequired,
+    page: PropTypes.number.isRequired,
+    largeImage: PropTypes.string.isRequired,
+  };
+
+  state = {
+    images: this.props.images,
+    loading: this.props.loading,
+    error: this.props.error,
+    searchQuery: this.props.searchQuery,
+    page: this.props.page,
+    largeImage: this.props.largeImage,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -63,12 +82,12 @@ export default class App extends Component {
     this.setState({ largeImage: url });
   };
 
-  toggleModal = () => {
-    this.setState({ largeImage: null });
+  closeModal = () => {
+    this.setState({ largeImage: '' });
   };
 
   render() {
-    const { images, loading, error, searchQuery, largeImage } = this.state;
+    const { images, loading, error, largeImage } = this.state;
     return (
       <>
         <div className="App">
@@ -86,8 +105,8 @@ export default class App extends Component {
           )}
         </div>
         {largeImage && (
-          <Modal onClose={this.toggleModal}>
-            <img src={largeImage} alt={searchQuery} />
+          <Modal onClose={this.closeModal}>
+            <img src={largeImage} alt="" />
           </Modal>
         )}
       </>

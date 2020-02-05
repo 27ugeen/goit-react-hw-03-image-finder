@@ -4,7 +4,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const Spinner = () => (
   <div className="Spinner">
-    <Loader type="Bars" color="#3f51b5" height={50} width={180} />
+    <Loader type="Bars" color="#3f51b5" height={50} width={50} />
   </div>
 );
 

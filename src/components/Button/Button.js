@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Button = ({ onLoadMore }) => (
   <div className="Spinner">
@@ -7,5 +8,9 @@ const Button = ({ onLoadMore }) => (
     </button>
   </div>
 );
+
+Button.propTypes = {
+  onLoadMore: PropTypes.func.isRequired,
+};
 
 export default Button;

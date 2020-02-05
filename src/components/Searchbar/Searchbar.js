@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Searchbar extends Component {
-  state = {
+  static defaultProps = {
     inputValue: '',
   };
 
-  handleChange = e => {
+  static propTypes = {
+    inputValue: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
+  state = {
+    inputValue: this.props.inputValue,
+  };
+
+  handleChange = ({ target }) => {
     this.setState({
-      inputValue: e.target.value,
+      inputValue: target.value,
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    
+
     this.props.onSubmit(this.state.inputValue);
     this.setState({
       inputValue: '',
