@@ -20,10 +20,17 @@ export default class Modal extends Component {
       this.props.onClose();
     }
   };
+
+  handleOverlayClick = e => {
+    if (e.target === e.currentTarget) {
+      this.props.onClose();
+    }
+  };
+
   render() {
     return (
       <>
-        <div className="Overlay">
+        <div className="Overlay" onClick={this.handleOverlayClick}>
           <div className="Modal">{this.props.children}</div>
         </div>
       </>

@@ -106,6 +106,11 @@ export default class App extends Component {
         </div>
         {largeImage && (
           <Modal onClose={this.closeModal}>
+            <button
+              type="button"
+              className="close"
+              onClick={this.closeModal}
+            ></button>
             <img src={largeImage} alt="" />
           </Modal>
         )}

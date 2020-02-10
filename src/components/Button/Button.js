@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Button = ({ onLoadMore }) => (
   <div className="Spinner">
     <button type="button" className="Button" onClick={onLoadMore}>
-      Load more...
+      Load more
     </button>
   </div>
 );
