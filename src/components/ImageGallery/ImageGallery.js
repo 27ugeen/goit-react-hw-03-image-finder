@@ -8,7 +8,8 @@ const ImageGallery = ({ images, onSetLargeImage }) => (
       <ImageGalleryItem
         key={id}
         webformatURL={webformatURL}
-        onSetLargeImage={() => onSetLargeImage(largeImageURL)}
+        largeImageURL={largeImageURL}
+        onSetLargeImage={onSetLargeImage}
       />
     ))}
   </ul>
