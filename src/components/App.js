@@ -6,34 +6,15 @@ import ImageGallery from './ImageGallery';
 import Button from './Button';
 import Modal from './Modal';
 import imagesApi from '../services/imagesApi';
-import PropTypes from 'prop-types';
 
 export default class App extends Component {
-  static defaultProps = {
+  state = {
     images: [],
     loading: false,
     error: '',
     searchQuery: '',
     page: 1,
     largeImage: '',
-  };
-
-  static propTypes = {
-    images: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.string.isRequired,
-    searchQuery: PropTypes.string.isRequired,
-    page: PropTypes.number.isRequired,
-    largeImage: PropTypes.string.isRequired,
-  };
-
-  state = {
-    images: this.props.images,
-    loading: this.props.loading,
-    error: this.props.error,
-    searchQuery: this.props.searchQuery,
-    page: this.props.page,
-    largeImage: this.props.largeImage,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -91,7 +72,7 @@ export default class App extends Component {
     return (
       <>
         <div className="App">
-          <Searchbar onSubmit={this.handleSearchFormSubmit} />
+          <Searchbar onHandleSubmit={this.handleSearchFormSubmit} />
           {error && <Notification message={error} />}
           {images.length > 0 && (
             <ImageGallery

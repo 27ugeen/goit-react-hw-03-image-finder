@@ -4,12 +4,24 @@ import PropTypes from 'prop-types';
 
 const ImageGallery = ({ images, onSetLargeImage }) => (
   <ul className="ImageGallery">
-    <ImageGalleryItem images={images} onSetLargeImage={onSetLargeImage} />
+    {images.map(({ id, webformatURL, largeImageURL }) => (
+      <ImageGalleryItem
+        key={id}
+        webformatURL={webformatURL}
+        onSetLargeImage={() => onSetLargeImage(largeImageURL)}
+      />
+    ))}
   </ul>
 );
 
 ImageGallery.propTypes = {
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    }),
+  ),
   onSetLargeImage: PropTypes.func.isRequired,
 };
 
